@@ -72,7 +72,7 @@
             buf_view[3] = cmd; // data length
             buf_view[4] = 0; // code
             
-            checksum = buf_view[2] + buf_view[3] ^ buf_view[4];
+            checksum = buf_view[2] ^ buf_view[3] ^ buf_view[4];
             buf_view[5] = checksum;
             
             console.log(buf_view);
