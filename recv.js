@@ -205,7 +205,7 @@
               payload.currL = view.getUint16(0, 1);
               payload.currR = view.getUint16(2, 1);
               payload.currF = view.getUint16(4, 1);
-              out = 'currl=' + payload.currL.toString() + ',currr=' + payload.currR.toString() + ',currF=' + payload.currF.toString() + '\n';
+              out = 'currl=' + payload.currL.toString() + ',currr=' + payload.currR.toString() + ',currf=' + payload.currF.toString() + '\n';
               receive.write(out);
               chart.write(out);
               break; 
