@@ -13,7 +13,7 @@
           MSP_IDENT:            100,
           MSP_STATUS:           101,
           MSP_RAW_IMU:          102,
-          MSP_SERVO:            103,
+          MSP_DATA_POINT:       103,
           MSP_MOTOR:            104,
           MSP_RC:               105,
           MSP_RAW_GPS:          106,
@@ -39,6 +39,8 @@
           MSP_SET_MISC:         207,
           MSP_RESET_CONF:       208,
           MSP_SELECT_SETTING:   210,
+          
+          MSP_SET_TRIGGER:      215,
           
           MSP_BIND:             240,
           
@@ -183,7 +185,11 @@
               receive.write(out);
               chart.write(out);
               break;
-            case codes.MSP_SERVO:
+            case codes.MSP_DATA_POINT:
+              payload.dp1 = view.getInt16(0, 1);
+              out = 'dp1=' + (payload.dp1).toString() + '\n';
+              receive.write(out);
+              chart.write(out);
               break;
             case codes.MSP_MOTOR:
               break; 
