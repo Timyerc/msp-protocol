@@ -187,10 +187,17 @@
               break;
             case codes.MSP_DATA_POINT:
               payload.dp1 = view.getInt16(0, 1);
-              out = 'dp1=' + (payload.dp1).toString() + '\n';
+              payload.dp2 = view.getInt16(2, 1);
+              out = 'dp1=' + (payload.dp1).toString() + ',dp2=' + (payload.dp2).toString() + '\n';
               receive.write(out);
               chart.write(out);
               break;
+            case codes.MSP_SET_TRIGGER:
+              payload.dp1 = view.getInt16(0, 1);
+              payload.dp2 = view.getInt16(2, 1);
+              out = 'dp1=' + (payload.dp1).toString() + ',dp2=' + (payload.dp2).toString() + '\n';
+              receive.write(out);
+              chart.write(out);  
             case codes.MSP_MOTOR:
               break; 
             case codes.MSP_RC:

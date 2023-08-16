@@ -7,7 +7,7 @@
  * 
  *******************************/
 
- (
+(
     function main() {
         var codes = {
           MSP_IDENT:            100,
