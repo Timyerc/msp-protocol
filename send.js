@@ -14,7 +14,7 @@
           MSP_STATUS:           101,
           MSP_RAW_IMU:          102,
           MSP_DATA_POINT:       103,
-          MSP_MOTOR:            104,
+          MSP_GYRO_DETECT:      104,
           MSP_RC:               105,
           MSP_RAW_GPS:          106,
           MSP_COMP_GPS:         107,

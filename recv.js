@@ -7,14 +7,14 @@
  * 
  *******************************/
 
- (
+(
     function main() {
         var codes = {
           MSP_IDENT:            100,
           MSP_STATUS:           101,
           MSP_RAW_IMU:          102,
           MSP_DATA_POINT:       103,
-          MSP_MOTOR:            104,
+          MSP_GYRO_DETECT:      104,
           MSP_RC:               105,
           MSP_RAW_GPS:          106,
           MSP_COMP_GPS:         107,
@@ -192,12 +192,20 @@
               receive.write(out);
               chart.write(out);
               break;
+            case codes.MSP_GYRO_DETECT:
+              payload.diff = view.getInt16(0, 1);
+              payload.gz = view.getInt16(2, 1);
+              out = 'diff=' + (payload.diff).toString() + ',gz=' + (payload.gz).toString() + '\n';
+              receive.write(out);
+              chart.write(out);
+              break;
             case codes.MSP_SET_TRIGGER:
               payload.dp1 = view.getInt16(0, 1);
               payload.dp2 = view.getInt16(2, 1);
               out = 'dp1=' + (payload.dp1).toString() + ',dp2=' + (payload.dp2).toString() + '\n';
               receive.write(out);
-              chart.write(out);  
+              chart.write(out);
+              break;
             case codes.MSP_MOTOR:
               break; 
             case codes.MSP_RC:
