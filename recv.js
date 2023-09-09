@@ -15,7 +15,7 @@
           MSP_RAW_IMU:          102,
           MSP_DATA_POINT:       103,
           MSP_GYRO_DETECT:      104,
-          MSP_RC:               105,
+          MSP_EDGE_BOTTOM_DETECT: 105,
           MSP_RAW_GPS:          106,
           MSP_COMP_GPS:         107,
           MSP_ATTITUDE:         108,
@@ -196,6 +196,14 @@
               payload.diff = view.getInt16(0, 1);
               payload.gz = view.getInt16(2, 1);
               out = 'diff=' + (payload.diff).toString() + ',gz=' + (payload.gz).toString() + '\n';
+              receive.write(out);
+              chart.write(out);
+              break;
+            case codes.MSP_EDGE_BOTTOM_DETECT:
+              payload.diff1 = view.getInt16(0, 1);
+              payload.diff2 = view.getInt16(2, 1);
+              payload.gz = view.getInt16(4, 1);
+              out = 'diff1=' + (payload.diff1).toString() + ',diff2=' + (payload.diff2).toString() + ',gz=' + (payload.gz).toString() + '\n';
               receive.write(out);
               chart.write(out);
               break;
