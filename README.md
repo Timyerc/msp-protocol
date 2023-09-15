@@ -17,6 +17,7 @@ https://github.com/Timyerc/msp-protocol.git
 | MSP_DATA_POINT | 103 | 测试数据点 |
 | MSP_GYRO_DETECT | 104 | 陀螺仪撞边判断 |
 | MSP_EDGE_BOTTOM_DETECT | 105 | 底边检测 |
+| MSP_MACHINE_STATE | 106 | 机器工作状态，水平or竖直 |
 | MSP_ATTITUDE | 108 | 机器姿态角 |
 | MSP_ANALOG | 110 | AD数据 |
 | MSP_ADAPTER | 111 | 适配器电压 |
