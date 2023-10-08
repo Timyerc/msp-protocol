@@ -29,6 +29,8 @@
           MSP_BOXNAMES:         116,
           MSP_PIDNAMES:         117,
           
+          MSP_BARO_DIFF:        119,  
+          
           MSP_SET_RAW_RC:       200,
           MSP_SET_RAW_GPS:      201,
           MSP_SET_PID:          202,

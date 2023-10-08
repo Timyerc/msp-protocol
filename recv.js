@@ -29,6 +29,8 @@
           MSP_BOXNAMES:         116,
           MSP_PIDNAMES:         117,
           
+          MSP_BARO_DIFF:        119,
+          
           MSP_SET_RAW_RC:       200,
           MSP_SET_RAW_GPS:      201,
           MSP_SET_PID:          202,
@@ -259,6 +261,12 @@
               break; 
             case codes.MSP_PIDNAMES:
               break; 
+            case codes.MSP_BARO_DIFF:
+              payload.baroD = view.getInt16(0, 1);
+              out = 'barod=' + payload.baroD.toString() + '\n';
+              receive.write(out);
+              chart.write(out);
+              break;
             case codes.MSP_SET_RAW_RC:
               break; 
             case codes.MSP_SET_RAW_GPS:
