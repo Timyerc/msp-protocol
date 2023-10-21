@@ -17,7 +17,7 @@
           MSP_GYRO_DETECT:      104,
           MSP_EDGE_BOTTOM_DETECT: 105,
           MSP_MACHINE_STATE:    106,
-          MSP_COMP_GPS:         107,
+          MSP_THRESHOLD:         107,
           MSP_ATTITUDE:         108,
           MSP_ALTITUDE:         109,
           MSP_ANALOG:           110,
@@ -229,7 +229,12 @@
               break; 
             case codes.MSP_RAW_GPS:
               break; 
-            case codes.MSP_COMP_GPS:
+            case codes.MSP_THRESHOLD:
+              payload.mthr = view.getInt16(0, 1);
+              payload.fthr = view.getInt16(2, 1);
+              out = 'mthr=' + (payload.mthr).toString() + ',fthr=' + (payload.fthr).toString() + '\n';
+              receive.write(out);
+              chart.write(out);
               break; 
             case codes.MSP_ATTITUDE:
               payload.eulerX = view.getInt16(0, 1);
