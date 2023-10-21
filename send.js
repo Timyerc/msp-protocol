@@ -10,52 +10,44 @@
 (
     function main() {
         var codes = {
-          MSP_IDENT:            100,
-          MSP_STATUS:           101,
-          MSP_RAW_IMU:          102,
-          MSP_DATA_POINT:       103,
-          MSP_GYRO_DETECT:      104,
-          MSP_EDGE_BOTTOM_DETECT: 105,
-          MSP_MACHINE_STATE:    106,
-          MSP_THRESHOLD:         107,
-          MSP_ATTITUDE:         108,
-          MSP_ALTITUDE:         109,
-          MSP_ANALOG:           110,
-          MSP_ADAPTER:          111,
-          MSP_PID:              112,
-          MSP_BOX:              113,
-          MSP_WATER_BOX:        114,
-          MSP_MOTOR_PINS:       115,
-          MSP_BOXNAMES:         116,
-          MSP_PIDNAMES:         117,
-          
-          MSP_BARO_DIFF:        119,  
-          
-          MSP_SET_RAW_RC:       200,
-          MSP_SET_RAW_GPS:      201,
-          MSP_SET_PID:          202,
-          MSP_SET_BOX:          203,
-          MSP_SET_RC_TUNING:    204,
-          MSP_ACC_CALIBRATION:  205,
-          MSP_MAG_CALIBRATION:  206,
-          MSP_SET_MISC:         207,
-          MSP_RESET_CONF:       208,
-          MSP_SELECT_SETTING:   210,
-          
-          MSP_SET_TRIGGER:      215,
-          
-          MSP_BIND:             240,
-          
-          MSP_EEPROM_WRITE:     250,
-          
-          MSP_DEBUGMSG:         253,
-          MSP_DEBUG:            254,
-          
-          // Additional baseflight commands that are not compatible with MultiWii
-          MSP_UID:              160,
-          MSP_ACC_TRIM:         240,
-          MSP_SET_ACC_TRIM:     239,
-          MSP_GPSSVINFO:        164 // get Signal Strength (only U-Blox)
+            MSP_IDENT:            100,
+            MSP_STATUS:           101,
+            MSP_RAW_IMU:          102,
+            MSP_DATA_POINT:       103,
+            MSP_GYRO_DETECT:      104,
+            MSP_EDGE_BOTTOM_DETECT: 105,
+            MSP_MACHINE_STATE:    106,
+            MSP_THRESHOLD:        107,
+            MSP_ATTITUDE:         108,
+            MSP_ANALOG:           110,
+            MSP_ADAPTER:          111,
+            MSP_WATER_BOX:        114,
+            MSP_WIFI_RSSI:        115,
+            MSP_WIFI_TEST:        116,
+            MSP_FAST_CURRENT:     117,
+            MSP_Z_TURN_FAST_CURRENT: 118,
+            MSP_BARO_DIFF:        119,
+            MSP_SYSTICK:          120,
+    
+            MSP_ACC_CALIBRATION:  205,
+            MSP_PLAY_VOICE:       208,
+            MSP_SET_SPRAY:        209,
+            MSP_SET_FAN:          211,
+            MSP_SET_MOTOR:        214,
+            MSP_SET_TRIGGER:      215,
+            
+            MSP_BIND:             240,
+            
+            MSP_EEPROM_WRITE:     250,
+            
+            MSP_DEBUGMSG:         253,
+            MSP_DEBUG:            254,
+            
+            // Additional baseflight commands that are not compatible with MultiWii
+            MSP_UID:              160,
+            MSP_ACC_TRIM:         240,
+            MSP_SET_ACC_TRIM:     239,
+            MSP_GPSSVINFO:        164 // get Signal Strength (only U-Blox)
         };
         
         
