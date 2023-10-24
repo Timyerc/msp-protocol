@@ -29,6 +29,7 @@ https://github.com/Timyerc/msp-protocol.git
 | MSP_Z_TURN_FAST_CURRENT | 118 | Z字水平换行电流 |
 | MSP_BARO_DIFF | 119 | 无边气压检测 |
 | MSP_SYSTICK | 120 | 系统周期 |
+| MSP_OVO_WATER_DET | 121 | 水量检测 |
 | 设置 |
 | MSP_ACC_CALIBRATION | 205 | 加速度校准 |
 | MSP_PLAY_VOICE | 208 | 测试语音 |
