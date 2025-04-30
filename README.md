@@ -31,6 +31,7 @@ https://github.com/Timyerc/msp-protocol.git
 | MSP_SYSTICK | 120 | 系统周期 |
 | MSP_OVO_WATER_DET | 121 | 水量检测 |
 | MSP_LEAK_DET | 122 | 无边检测 |
+| MSP_MOTOR_CURRENT | 123 | 马达实际电流 |
 | 设置 |
 | MSP_ACC_CALIBRATION | 205 | 加速度校准 |
 | MSP_PLAY_VOICE | 208 | 测试语音 |
