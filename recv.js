@@ -46,6 +46,13 @@
             MSP_SET_MOTOR:        214,
             MSP_SET_TRIGGER:      215,
             MSP_SET_TRIGGER_2:    216,
+            MSP_SET_PWMVALUE:     220,
+            MSP_SET_USE_FAN_LEVEL_DYNAMIC_COMP: 221,
+            MSP_SET_USE_FAN_OUTPUT_PID: 222,
+            MSP_SET_MOTOR_VALUE:  223,
+            MSP_SET_BOUNDLESS:    224,
+            MSP_SET_SPRAY_VALUE:  225,
+            MSP_SET_GYRO_THRESHOLD: 226,
 
             MSP_BIND:             240,
 
@@ -70,6 +77,7 @@
         
         var message_decode = function (data) {
             var data = new Uint8Array(data);
+            console.log(data);
             
             if (typeof message_state == 'undefined') {
                 message_state = 0;
@@ -363,7 +371,7 @@
                     payload.gyroThres = view.getUint8(1, 1);
                     payload.gyroupdiff = view.getUint8(2, 1);
                     payload.gyroupthres = view.getUint8(3, 1);
-                    out = 'gyrodiff=' + (payload.gyrodiff).toString() + ',gyroThres=' + (payload.gyroThres).toString() + ',gyroupdiff=' + (payload.gyroupdiff).toString() + ',gyroThres=' + (payload.gyroThres).toString() + ',gyroupthres=' + (payload.gyroupthres).toString() + '\n';
+                    out = 'gyrodiff=' + (payload.gyrodiff).toString() + ',gyroThres=' + (payload.gyroThres).toString() + ',gyroupdiff=' + (payload.gyroupdiff).toString() + ',gyroupthres=' + (payload.gyroupthres).toString() + '\n';
                     receive.write(out);
                     chart.write(out);
                     break;
@@ -382,6 +390,27 @@
                     out = 'real=' + (payload.real).toString() + ',target=' + (payload.target).toString() + ',output=' + (payload.out).toString() + '\n';
                     receive.write(out);
                     chart.write(out);
+                    break;
+                case codes.MSP_SET_PWMVALUE:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_SET_USE_FAN_LEVEL_DYNAMIC_COMP:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_SET_USE_FAN_OUTPUT_PID:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_SET_MOTOR_VALUE:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_SET_BOUNDLESS:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_SET_SPRAY_VALUE:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_SET_GYRO_THRESHOLD:
+                    receive.write('OK \n');
                     break;
                 case codes.MSP_GET_FAN_PID_RESULT:
                     payload.target = view.getInt32(0, 1);
