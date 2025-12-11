@@ -21,13 +21,16 @@
             MSP_ATTITUDE:         108,
             MSP_ANALOG:           110,
             MSP_ADAPTER:          111,
+            MSP_BARO_DIFF:        113,
             MSP_WATER_BOX:        114,
             MSP_WIFI_RSSI:        115,
             MSP_WIFI_TEST:        116,
             MSP_FAST_CURRENT:     117,
             MSP_Z_TURN_FAST_CURRENT: 118,
-            MSP_BARO_DIFF:        119,
             MSP_SYSTICK:          120,
+            MSP_ORIGIN_ARGS:      121,
+            MSP_MOTOR_CURRENT:    123,
+            MSP_GET_FAN_PID_RESULT: 142,
 
             MSP_ACC_CALIBRATION:  205,
             MSP_PLAY_VOICE:       208,
@@ -35,6 +38,7 @@
             MSP_SET_FAN:          211,
             MSP_SET_MOTOR:        214,
             MSP_SET_TRIGGER:      215,
+            MSP_SET_TRIGGER_2:    216,
 
             MSP_BIND:             240,
 
@@ -177,7 +181,8 @@
                 case codes.MSP_DATA_POINT:
                     payload.dp1 = view.getInt16(0, 1);
                     payload.dp2 = view.getInt16(2, 1);
-                    out = 'dp1=' + (payload.dp1).toString() + ',dp2=' + (payload.dp2).toString() + '\n';
+                    payload.dp3 = view.getInt16(4, 1);
+                    out = 'dp1=' + (payload.dp1).toString() + ',dp2=' + (payload.dp2).toString() + ',dp3=' + (payload.dp3).toString()  + '\n';
                     receive.write(out);
                     chart.write(out);
                     break;
@@ -188,10 +193,100 @@
                     receive.write(out);
                     chart.write(out);
                     break;
+                case codes.MSP_EDGE_BOTTOM_DETECT:
+                    payload.diff1 = view.getInt16(0, 1);
+                    payload.diff2 = view.getInt16(2, 1);
+                    payload.gyroz = view.getInt16(4, 1);
+                    out = 'diff1=' + (payload.diff1).toString() + ',diff2=' + (payload.diff2).toString() + ',gyroz=' + (payload.gyroz).toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_MACHINE_STATE:
+                    payload.state = view.getUint16(0, 1);
+                    payload.ax = view.getUint16(2, 1);
+                    payload.ay = view.getUint16(4, 1);
+                    payload.az = view.getUint16(6, 1);
+                    out = 'state=' + payload.state.toString() + ',ax=' + payload.ax.toString() + ',ay=' + payload.ay.toString() + ',az=' + payload.az.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_THRESHOLD:
+                    payload.thres = view.getUint16(0, 1);
+                    payload.minCnt = view.getUint16(2, 1);
+                    payload.maxCnt = view.getUint16(4, 1);
+                    payload.target = view.getUint16(6, 1);
+                    out = 'thres=' + payload.thres.toString() + ',minCnt=' + payload.minCnt.toString() + ',maxCnt=' + payload.maxCnt.toString() + ',target=' + payload.target.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_ATTITUDE:
+                    payload.eulerX = view.getInt16(0, 1);
+                    payload.eulerY = view.getInt16(2, 1);
+                    payload.eulerZ = view.getInt16(4, 1);
+                    out = 'eulerx=' + (payload.eulerX).toString() + ',eulery=' + (payload.eulerY).toString() + ',eulerz=' + (payload.eulerZ).toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_ANALOG:
+                    payload.currl = view.getUint16(0, 1);
+                    payload.currr = view.getUint16(2, 1);
+                    payload.currf = view.getUint16(4, 1);
+                    out = 'currl=' + payload.currl.toString() + ',currr=' + payload.currr.toString() + ',currf=' + payload.currf.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_ADAPTER:
+                    payload.va = view.getUint16(0, 1);
+                    payload.vb = view.getUint16(2, 1);
+                    out = 'va=' + payload.va.toString() + ',vb=' + payload.vb.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_BARO_DIFF:
+                    payload.barodiff = view.getInt16(0, 1);
+                    payload.baro = view.getUint32(2, 1);
+                    payload.std = view.getUint32(6, 1);
+                    out = 'barodiff=' + payload.barodiff.toString() + ',baro=' + payload.baro.toString() + ',std=' + payload.std.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_WATER_BOX:
+                    payload.wreal = view.getUint8(0, 1);
+                    payload.wadc = view.getUint16(1, 1);
+                    payload.wstatus = view.getUint16(3, 1);
+                    out = 'wreal=' + payload.wreal.toString() + ',wadc=' + payload.wadc.toString() + ',wstatus=' + payload.wstatus.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
                 case codes.MSP_SET_TRIGGER:
                     payload.dp1 = view.getInt16(0, 1);
                     payload.dp2 = view.getInt16(2, 1);
                     out = 'dp1=' + (payload.dp1).toString() + ',dp2=' + (payload.dp2).toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_SET_TRIGGER_2:
+                    payload.real = view.getInt16(0, 1);
+                    payload.target = view.getInt16(2, 1);
+                    payload.pwm = view.getInt16(4, 1);
+                    payload.out = view.getInt16(6, 1);
+                    out = 'real=' + (payload.real).toString() + ',target=' + (payload.target).toString() + ',output=' + (payload.out).toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_ORIGIN_ARGS:
+                    payload.y2top = view.getInt16(0, 1);
+                    payload.x2right = view.getInt16(2, 1);
+                    payload.xtotal = view.getInt16(4, 1);
+                    payload.xrun = view.getInt16(6, 1);
+                    out = 'y2top=' + (payload.y2top).toString() + ',x2right=' + (payload.x2right).toString() + ',xtotal=' + (payload.xtotal).toString()+ ',xrun=' + (payload.xrun).toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_MOTOR_CURRENT:
+                    payload.curl = view.getInt16(0, 1);
+                    payload.curr = view.getInt16(2, 1);
+                    out = 'curl=' + (payload.curl).toString() + ',curr=' + (payload.curr).toString() + '\n';
                     receive.write(out);
                     chart.write(out);
                     break;
@@ -201,30 +296,10 @@
                     receive.write(out);
                     chart.write(out);
                     break; 
-                case codes.MSP_THRESHOLD:
-                    payload.thres = view.getUint16(0, 1);
-                    payload.currf = view.getUint16(2, 1);
-                    out = 'thres=' + payload.thres.toString() + ',currf=' + payload.currf.toString() + '\n';
-                    receive.write(out);
-                    chart.write(out);
-                    break; 
-                case codes.MSP_ATTITUDE:
-                    payload.eulerX = view.getInt16(0, 1);
-                    out = 'eulerx=' + (payload.eulerX).toString() + '\n';
-                    receive.write(out);
-                    chart.write(out);
-                    break; 
-                case codes.MSP_ANALOG:
-                    payload.thres = view.getUint16(0, 1);
-                    payload.currf = view.getUint16(2, 1);
-                    out = 'thres=' + payload.thres.toString() + ',currf=' + payload.currf.toString() + '\n';
-                    receive.write(out);
-                    chart.write(out);
-                    break; 
-                case codes.MSP_BARO_DIFF:
-                    payload.barodiff = view.getUint16(0, 1);
-                    payload.baro = view.getUint32(2, 1);
-                    out = 'barodiff=' + payload.barodiff.toString() + ',baro=' + payload.baro.toString() + '\n';
+                case codes.MSP_GET_FAN_PID_RESULT:
+                    payload.target = view.getInt32(0, 1);
+                    payload.real = view.getInt32(4, 1);
+                    out = 'target=' + payload.target.toString() + ',real=' + payload.real.toString() + '\n';
                     receive.write(out);
                     chart.write(out);
                     break; 
