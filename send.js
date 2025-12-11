@@ -27,7 +27,6 @@
             MSP_WIFI_TEST:        116,
             MSP_FAST_CURRENT:     117,
             MSP_Z_TURN_FAST_CURRENT: 118,
-            MSP_BARO_DIFF:        119,
             MSP_SYSTICK:          120,
     
             MSP_ACC_CALIBRATION:  205,
