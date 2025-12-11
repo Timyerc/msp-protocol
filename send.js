@@ -33,7 +33,7 @@
             MSP_GET_PWMVALUE:     130,
             MSP_GET_USE_FAN_LEVEL_DYNAMIC_COMP: 131,
             MSP_GET_USE_FAN_OUTPUT_PID: 132,
-            MSP_GET_MOTOR_VALUES: 133,
+            MSP_GET_MOTOR_VALUE: 133,
             MSP_GET_BOUNDLESS:      134,
             MSP_GET_SPRAY_VALUE:    135,
             MSP_GET_GYRO_THRESHOLD: 136,
@@ -59,32 +59,76 @@
             MSP_GPSSVINFO:        164 // get Signal Strength (only U-Blox)
         };
         
-        
-        
-        var str = send.getString();
-        var cmd = codes[str];
-        
-        if (typeof cmd != undefined) {
-            var size = 6; // 6 bytes for protocol overhead
-            var checksum = 0;
-            
-            var buffer_out = new ArrayBuffer(size);
-            var buf_view = new Uint8Array(buffer_out);    
-            
-            buf_view[0] = 0xFF; // $
-            buf_view[1] = 0xFF; // M
-            buf_view[2] = 0x03; // <
-            buf_view[3] = cmd; // data length
-            buf_view[4] = 0; // code
-            
-            checksum = buf_view[2] ^ buf_view[3] ^ buf_view[4];
-            buf_view[5] = checksum;
-            
-            console.log(buf_view);
-            
-            send.writeBytes(buf_view);
+        // 输入示例: "MSP_SET_MOTOR Uint16:406 Uint8:100 Int16:-4096 Uint32:10000"
+        var input = send.getString().trim();
+        var parts = input.split(/\s+/);
+    
+        var cmdName = parts[0];
+        var cmd = codes[cmdName];
+    
+        if (cmd === undefined) {
+            console.log("Unknown command:", cmdName);
+            return;
         }
+    
+        // --- 解析参数 ---
+        var typeMap = {
+            "Uint8":  { size: 1, writer: "setUint8"  },
+            "Int8":   { size: 1, writer: "setInt8"   },
+            "Uint16": { size: 2, writer: "setUint16" },
+            "Int16":  { size: 2, writer: "setInt16"  },
+            "Uint32": { size: 4, writer: "setUint32" },
+            "Int32":  { size: 4, writer: "setInt32"  }
+        };
+    
+        var args = [];
+        var payloadSize = 0;
+    
+        for (var i = 1; i < parts.length; i++) {
+            var p = parts[i];
+            var kv = p.split(":");
+    
+            if (kv.length !== 2) continue;
+    
+            var type = kv[0];
+            var value = parseInt(kv[1]);
+    
+            if (!typeMap[type]) continue;
+    
+            args.push({ type: type, value: value });
+            payloadSize += typeMap[type].size;
+        }
+    
+        var totalSize = 6 + payloadSize; // MSP固定头部6字节
+        var buf = new Uint8Array(totalSize);
+        var dv = new DataView(buf.buffer);
+    
+        // MSP Header
+        buf[0] = 0xFF; // '$'
+        buf[1] = 0xFF; // 'M'
+        buf[2] = 0x03; // '<'
+        buf[3] = cmd;
+        buf[4] = payloadSize;
+    
+        // 填充 payload
+        var offset = 5;
+        for (var a of args) {
+            var info = typeMap[a.type];
+            dv[info.writer](offset, a.value, true); // true = little-endian
+            offset += info.size;
+        }
+    
+        // checksum = XOR(size, cmd, payload bytes...)
+        var checksum =  buf[2] ^ buf[3] ^ buf[4];
+        for (var i = 5; i < offset; i++) {
+            checksum ^= buf[i];
+        }
+    
+        buf[offset] = checksum;
+    
+        console.log(buf);
+        send.writeBytes(buf);
 
-        return   ;
+        return;
     }
 )() 

@@ -33,7 +33,7 @@
             MSP_GET_PWMVALUE:     130,
             MSP_GET_USE_FAN_LEVEL_DYNAMIC_COMP: 131,
             MSP_GET_USE_FAN_OUTPUT_PID: 132,
-            MSP_GET_MOTOR_VALUES: 133,
+            MSP_GET_MOTOR_VALUE: 133,
             MSP_GET_BOUNDLESS:      134,
             MSP_GET_SPRAY_VALUE:    135,
             MSP_GET_GYRO_THRESHOLD: 136,
@@ -114,7 +114,7 @@
                         message_buffer_uint8_view[message_length_received] = data[i];
                         message_checksum ^= data[i];
                         message_length_received++;
-                        
+
                         if (message_length_received >= message_length_expected) {
                             message_state++;
                         }
@@ -314,15 +314,15 @@
                     break;
                 case codes.MSP_GET_USE_FAN_LEVEL_DYNAMIC_COMP:
                     payload.pwmmax = view.getUint8(0, 1);
-                    payload.pwmmin = view.getUInt8(1, 1);
+                    payload.pwmmin = view.getUint8(1, 1);
                     out = 'pwmmax=' + (payload.pwmmax).toString() + ',pwmmin=' + (payload.pwmmin).toString() + '\n';
                     receive.write(out);
                     chart.write(out);
                     break;
                 case codes.MSP_GET_USE_FAN_OUTPUT_PID:
                     payload.pwmidle = view.getUint8(0, 1);
-                    payload.pwmmin = view.getUInt8(1, 1);
-                    payload.pwmmax = view.getUInt8(2, 1);
+                    payload.pwmmin = view.getUint8(1, 1);
+                    payload.pwmmax = view.getUint8(2, 1);
                     payload.pressure = view.getInt16(3, 1);
                     payload.pmax = view.getInt16(5, 1);
                     payload.pmin = view.getInt16(7, 1);
@@ -332,26 +332,26 @@
                     break;
                 case codes.MSP_GET_MOTOR_VALUE:
                     payload.pwmmin = view.getUint8(0, 1);
-                    payload.uppwmmin = view.getUInt8(1, 1);
+                    payload.uppwmmin = view.getUint8(1, 1);
                     out = 'pwmmin=' + (payload.pwmmin).toString() + ',uppwmmin=' + (payload.uppwmmin).toString() + '\n';
                     receive.write(out);
                     chart.write(out);
                     break;
                 case codes.MSP_GET_BOUNDLESS:
                     payload.fanthres = view.getUint8(0, 1);
-                    payload.fanupthres = view.getUInt8(1, 1);
-                    payload.hangcnt = view.getUInt8(2, 1);
+                    payload.fanupthres = view.getUint8(1, 1);
+                    payload.hangcnt = view.getUint8(2, 1);
                     out = 'fanthres=' + (payload.fanthres).toString() + ',fanupthres=' + (payload.fanupthres).toString() + ',hangcnt=' + (payload.hangcnt).toString() + '\n';
                     receive.write(out);
                     chart.write(out);
                     break;
                 case codes.MSP_GET_SPRAY_VALUE:
                     payload.waterpump = view.getUint8(0, 1);
-                    out = 'waterpump=' + (payload.pwmmin).toString();
+                    out = 'waterpump=' + (payload.waterpump).toString();
                     if (payload.waterpump == 1) {
-                        payload.duration = view.getUInt16(1, 1);
+                        payload.duration = view.getUint16(1, 1);
                         payload.startangle = view.getUint8(3, 1);
-                        payload.movecnt = view.getUInt8(4, 1);
+                        payload.movecnt = view.getUint8(4, 1);
                         out += ',duration=' + (payload.duration).toString() + ',startangle=' + (payload.startangle).toString() + ',movecnt=' + (payload.movecnt).toString();
                     }
                     out += '\n';
@@ -360,9 +360,9 @@
                     break;
                 case codes.MSP_GET_GYRO_THRESHOLD:
                     payload.gyrodiff = view.getUint8(0, 1);
-                    payload.gyroThres = view.getUInt8(1, 1);
-                    payload.gyroupdiff = view.getUInt8(2, 1);
-                    payload.gyroupthres = view.getUInt8(3, 1);
+                    payload.gyroThres = view.getUint8(1, 1);
+                    payload.gyroupdiff = view.getUint8(2, 1);
+                    payload.gyroupthres = view.getUint8(3, 1);
                     out = 'gyrodiff=' + (payload.gyrodiff).toString() + ',gyroThres=' + (payload.gyroThres).toString() + ',gyroupdiff=' + (payload.gyroupdiff).toString() + ',gyroThres=' + (payload.gyroThres).toString() + ',gyroupthres=' + (payload.gyroupthres).toString() + '\n';
                     receive.write(out);
                     chart.write(out);
