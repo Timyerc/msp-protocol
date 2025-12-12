@@ -44,6 +44,7 @@
             MSP_SET_FAN:          211,
             MSP_SET_MOTOR:        214,
             MSP_SET_TRIGGER:      215,
+            MSP_SET_TRIGGER_2:    216,
             MSP_SET_PWMVALUE:     220,
             MSP_SET_USE_FAN_LEVEL_DYNAMIC_COMP: 221,
             MSP_SET_USE_FAN_OUTPUT_PID: 222,

@@ -375,19 +375,34 @@
                     receive.write(out);
                     chart.write(out);
                     break;
+                case codes.MSP_ACC_CALIBRATION:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_PLAY_VOICE:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_SET_SPRAY:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_SET_FAN:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_SET_MOTOR:
+                    receive.write('OK \n');
+                    break;
                 case codes.MSP_SET_TRIGGER:
-                    payload.dp1 = view.getInt16(0, 1);
-                    payload.dp2 = view.getInt16(2, 1);
+                    payload.recv0 = view.getInt16(0, 1);
+                    payload.recv1 = view.getInt16(2, 1);
                     out = 'dp1=' + (payload.dp1).toString() + ',dp2=' + (payload.dp2).toString() + '\n';
                     receive.write(out);
                     chart.write(out);
                     break;
                 case codes.MSP_SET_TRIGGER_2:
-                    payload.real = view.getInt16(0, 1);
-                    payload.target = view.getInt16(2, 1);
-                    payload.pwm = view.getInt16(4, 1);
-                    payload.out = view.getInt16(6, 1);
-                    out = 'real=' + (payload.real).toString() + ',target=' + (payload.target).toString() + ',output=' + (payload.out).toString() + '\n';
+                    payload.recv0 = view.getInt16(0, 1);
+                    payload.recv1 = view.getInt16(2, 1);
+                    payload.recv2 = view.getInt16(4, 1);
+                    payload.recv3 = view.getInt16(6, 1);
+                    out = 'recv0=' + (payload.recv0).toString() + ',recv1=' + (payload.recv1).toString() + ',recv2=' + (payload.recv2).toString() + ',recv3=' + (payload.recv3).toString() + '\n';
                     receive.write(out);
                     chart.write(out);
                     break;
