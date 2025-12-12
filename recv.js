@@ -444,7 +444,7 @@
                 case codes.MSP_SET_TRIGGER:
                     payload.recv0 = view.getInt16(0, 1);
                     payload.recv1 = view.getInt16(2, 1);
-                    out = 'dp1=' + (payload.dp1).toString() + ',dp2=' + (payload.dp2).toString() + '\n';
+                    out = 'recv0=' + (payload.recv0).toString() + ',recv1=' + (payload.recv1).toString() + '\n';
                     receive.write(out);
                     chart.write(out);
                     break;
