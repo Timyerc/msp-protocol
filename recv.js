@@ -401,9 +401,30 @@
                     payload.vbat = view.getUint8(1, 1);
                     payload.current = view.getUint16(2, 1);
                     payload.cell = view.getUint8(4, 1);
-                    out = 'state=' + payload.state.toString() + ',vbat=' + payload.vbat.toString() + ',vbat=' + payload.vbat.toString() + ',vbat=' + payload.vbat.toString() + '\n';
+                    out = 'state=' + payload.state.toString() + ',vbat=' + payload.vbat.toString() + ',current=' + payload.current.toString() + ',cell=' + payload.cell.toString() + '\n';
                     receive.write(out);
                     chart.write(out);
+                    break;
+                case codes.MSP_GET_AUTO_TEST_RESULT:
+                    payload.completed = view.getUint8(0, 1);
+                    out = 'completed=' + payload.completed.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_GET_REMOTE:
+                    payload.code = view.getUint8(0, 1);
+                    out = 'code=' + payload.code.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_WIFI_TEST:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_SET_FAN_PID_PARAM:
+                    receive.write('OK \n');
+                    break;
+                case codes.MSP_SET_AUTO_TEST_RESULT:
+                    receive.write('OK \n');
                     break;
                 case codes.MSP_ACC_CALIBRATION:
                     receive.write('OK \n');
