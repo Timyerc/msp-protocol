@@ -37,8 +37,14 @@
             MSP_GET_BOUNDLESS:      134,
             MSP_GET_SPRAY_VALUE:    135,
             MSP_GET_GYRO_THRESHOLD: 136,
+            MSP_GET_FAN_PID_PARAM:  140,
             MSP_GET_FAN_PID_RESULT: 142,
+            MSP_GET_BATTERY_CHARGE_PARAM: 146,
+            MSP_GET_AUTO_TEST_RESULT: 148,
+            MSP_GET_REMOTE:         151,
 
+            MSP_SET_FAN_PID_PARAM: 141,
+            MSP_SET_AUTO_TEST_RESULT: 147,
             MSP_ACC_CALIBRATION:  205,
             MSP_PLAY_VOICE:       208,
             MSP_SET_SPRAY:        209,
@@ -375,6 +381,30 @@
                     receive.write(out);
                     chart.write(out);
                     break;
+                case codes.MSP_GET_FAN_PID_PARAM:
+                    payload.kp = view.getInt32(0, 1);
+                    payload.ki = view.getInt32(4, 1);
+                    payload.kd = view.getInt32(8, 1);
+                    out = 'kp=' + payload.kp.toString() + ',ki=' + payload.ki.toString() + ',kd=' + payload.kd.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break; 
+                case codes.MSP_GET_FAN_PID_RESULT:
+                    payload.target = view.getInt32(0, 1);
+                    payload.real = view.getInt32(4, 1);
+                    out = 'target=' + payload.target.toString() + ',real=' + payload.real.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_GET_BATTERY_CHARGE_PARAM:
+                    payload.state = view.getUint8(0, 1);
+                    payload.vbat = view.getUint8(1, 1);
+                    payload.current = view.getUint16(2, 1);
+                    payload.cell = view.getUint8(4, 1);
+                    out = 'state=' + payload.state.toString() + ',vbat=' + payload.vbat.toString() + ',vbat=' + payload.vbat.toString() + ',vbat=' + payload.vbat.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
                 case codes.MSP_ACC_CALIBRATION:
                     receive.write('OK \n');
                     break;
@@ -427,13 +457,7 @@
                 case codes.MSP_SET_GYRO_THRESHOLD:
                     receive.write('OK \n');
                     break;
-                case codes.MSP_GET_FAN_PID_RESULT:
-                    payload.target = view.getInt32(0, 1);
-                    payload.real = view.getInt32(4, 1);
-                    out = 'target=' + payload.target.toString() + ',real=' + payload.real.toString() + '\n';
-                    receive.write(out);
-                    chart.write(out);
-                    break; 
+                
                 default:
                     break;
             }
