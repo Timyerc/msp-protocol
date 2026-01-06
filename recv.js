@@ -21,6 +21,7 @@
             MSP_ATTITUDE:         108,
             MSP_ANALOG:           110,
             MSP_ADAPTER:          111,
+            MSP_FOURCORNER:       112,
             MSP_BARO_DIFF:        113,
             MSP_WATER_BOX:        114,
             MSP_WIFI_RSSI:        115,
@@ -260,6 +261,16 @@
                     payload.va = view.getUint16(0, 1);
                     payload.vb = view.getUint16(2, 1);
                     out = 'va=' + payload.va.toString() + ',vb=' + payload.vb.toString() + '\n';
+                    receive.write(out);
+                    chart.write(out);
+                    break;
+                case codes.MSP_FOURCORNER:
+                    payload.cs = view.getUint8(0, 1);
+                    var tlval = ((payload.cs >> 3) & 1);
+                    var trval = ((payload.cs >> 2) & 1);
+                    var blval = ((payload.cs >> 1) & 1);
+                    var brval = ((payload.cs >> 0) & 1);
+                    out = 'tl=' + tlval.toString() + ',tr=' + trval.toString() + ',bl=' + blval.toString() + ',br=' + brval.toString() + '\n';
                     receive.write(out);
                     chart.write(out);
                     break;
