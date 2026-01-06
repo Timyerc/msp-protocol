@@ -21,6 +21,7 @@
             MSP_ATTITUDE:         108,
             MSP_ANALOG:           110,
             MSP_ADAPTER:          111,
+            MSP_FOURCORNER:       112,
             MSP_BARO_DIFF:        113,
             MSP_WATER_BOX:        114,
             MSP_WIFI_RSSI:        115,
