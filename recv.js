@@ -417,6 +417,11 @@
                     receive.write(out);
                     chart.write(out);
                     break;
+                case codes.MSP_GET_BATTERY_CHARGE_PARAM2:
+                    payload.cell1 = view.getUint8(0, 1);
+                    payload.cell2 = view.getUint8(1, 1);
+                    payload.cell3 = view.getUint8(2, 1);
+                    payload.cell4 = view.getUint8(3, 1);
                     
                     out = 'cell1=' + payload.cell1.toString() + ',cell2=' + payload.cell2.toString() + ',cell3=' + payload.cell3.toString() + ',cell4=' + payload.cell4.toString() + '\n';
                     receive.write(out);
