@@ -41,6 +41,7 @@
             MSP_GET_FAN_PID_PARAM:  140,
             MSP_GET_FAN_PID_RESULT: 142,
             MSP_GET_BATTERY_CHARGE_PARAM: 146,
+            MSP_GET_BATTERY_CHARGE_PARAM2: 149,
             MSP_GET_AUTO_TEST_RESULT: 148,
             MSP_GET_REMOTE:         151,
     
